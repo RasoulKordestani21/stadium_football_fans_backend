@@ -19,5 +19,8 @@
   "homepage": "https://github.com/RasoulKordestani21/stadium_football_fans_backend#readme",
   "dependencies": {
     "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
