@@ -1,33 +1,15 @@
-const express = require('express')
+// create an express app
+const express = require("express")
 const app = express()
 
-let people = [
-    {
-      name: "Hannah Rickard",
-      number: "06-51-99-56-83",
-      id: 1
-    },
-    {
-      name: "Hyun Namkoong",
-      number: "10987654",
-      id: 2
-    },
-    {
-      name: "Courtney Martinez",
-      number: "3691215",
-      id: 3
-    }
-  ]
+// use the express-static middleware
+app.use(express.static("public"))
 
-  app.get('/', (request, response) => {
-      response.send('<h1>Phonebook</h1>')
-  })
+// define the first route
+app.get("/", function (req, res) {
+  res.send("<h1>Hello World!</h1>")
+})
 
-  app.get('/api/people', (request, response) => {
-      response.json(people)
-  })
-
-  const PORT = 3001
-  app.listen(process.env.PORT || 3001, () => {
-      console.log(`Server running on port ${PORT}`)
-  })
+// start the server listening for requests
+app.listen(process.env.PORT || 3000, 
+	() => console.log("Server is running..."));
