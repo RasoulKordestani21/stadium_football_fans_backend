@@ -1,0 +1,19 @@
+{
+  "name": "stadium_football_fans_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RasoulKordestani21/stadium_football_fans_backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RasoulKordestani21/stadium_football_fans_backend/issues"
+  },
+  "homepage": "https://github.com/RasoulKordestani21/stadium_football_fans_backend#readme"
+}
