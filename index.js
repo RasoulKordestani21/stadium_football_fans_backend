@@ -2,6 +2,17 @@ const PORT = process.env.PORT || 3000;
 const express = require("express");
 const app = express();
 
+//import image
+const image = require("./dataBase");
+
+// for (let i = 18; i <= 26; i++) {
+//   console.log(image[Math.floor(i / image.length)][i % image.length]);
+// }
+
+const maskPageDefiner = chairNum => {
+  return image[Math.floor(+chairNum / image.length)][+chairNum % image.length];
+};
+
 app.use(express.json());
 
 const courses = [
@@ -11,8 +22,25 @@ const courses = [
 ];
 
 app.get("/", function (req, res) {
+  //handling cors error
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+
   //when we get an http get request to the root/homepage
-  res.send("Hello World");
+  let maskPage, error;
+  if (
+    req.query.chairNum > -1 &&
+    req.query.chairNum < image.length * image[0].length
+  ) {
+    maskPage = maskPageDefiner(req.query.chairNum);
+    error = "";
+  } else {
+    maskPage = -1;
+    error = "لطفا عدد ورودی را درست وارد نمایید.";
+  }
+  res.send({ maskPage, error });
 });
 
 //when we route to /courses
