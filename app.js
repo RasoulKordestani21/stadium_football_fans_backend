@@ -23,10 +23,11 @@ const courses = [
 
 app.get("/", function (req, res) {
   //handling cors error
-  // res.setHeader("Access-Control-Allow-Origin", "*");
-  // res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  // res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  // res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  // res.setHeader("salam", "aaaaaa");
 
   //when we get an http get request to the root/homepage
   let maskPage, error;
@@ -50,6 +51,11 @@ app.get("/courses", function (req, res) {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.send(courses); //respond with the array of courses
+});
+
+app.get("/salam", (req, res) => {
+  console.log(req,"this is req")
+  res.send({ name: "ali" });
 });
 
 //To get a specific course, we need to define a parameter id
@@ -108,6 +114,6 @@ app.put("/courses/:id", function (req, res) {
 });
 
 app.listen(PORT, function () {
-  console.log(process.env.PORT)
+  console.log(process.env.PORT);
   console.log(`Listening on Port ${PORT}`);
 });
