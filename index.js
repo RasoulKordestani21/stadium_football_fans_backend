@@ -108,5 +108,6 @@ app.put("/courses/:id", function (req, res) {
 });
 
 app.listen(PORT, function () {
+  console.log(process.env.PORT)
   console.log(`Listening on Port ${PORT}`);
 });
