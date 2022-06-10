@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node index.js",
-    "build": "webpack"
+    "start": "node app.js",
+    "build": "ng build",
+    "heroku-postbuild": "ng build --prod"
   },
   "dependencies": {
     "@okta/oidc-middleware": "^4.3.0",
