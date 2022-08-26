@@ -8,6 +8,10 @@ router.get("/posts", async (req, res) => {
     username: req.query.username,
     password: req.query.password
   });
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", true);
   if (posts) {
     res.send(posts);
   } else {
@@ -19,6 +23,10 @@ router.get("/posts", async (req, res) => {
 });
 
 router.post("/posts", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", true);
   console.log(req.query);
   const post = new Post({
     username: req.query.username,
