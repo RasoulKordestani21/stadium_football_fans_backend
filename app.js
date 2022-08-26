@@ -4,6 +4,7 @@ const routes = require("./routes");
 require("dotenv").config();
 // Connect to MongoDB database
 
+
 mongoose
   .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
