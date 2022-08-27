@@ -1,4 +1,4 @@
-const port = process.env.port;
+const port = process.env.PORT;
 const express = require("express");
 const mongoose = require("mongoose"); // new
 const routes = require("./routes");
