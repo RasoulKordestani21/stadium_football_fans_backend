@@ -17,10 +17,10 @@ loginRouter.get("/signin", async (req, res) => {
     username: req.query.username,
     password: req.query.password
   });
-  // res.setHeader("Access-Control-Allow-Origin", "*");
-  // res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  // res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  // res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", true);
   // console.log(posts);
   if (findUser) {
     res.send({ isSuccess: true });
@@ -86,4 +86,4 @@ loginRouter.post("/signup", async (req, res) => {
 
 module.exports = loginRouter;
 
-[]
+[];
