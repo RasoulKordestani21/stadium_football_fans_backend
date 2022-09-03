@@ -1,31 +1,18 @@
 const express = require("express");
 // const router = require("../../routes");
 const loginRouter = express.Router();
-const mongoose = require("mongoose");
+const LoginModel = require("./loginModels");
 
-const loginSchema = mongoose.Schema({
-  username: String,
-  password: String
-});
-
-// const SigninModel = mongoose.model("signin", signinSchema);
-
-const LoginModel = mongoose.model("login", loginSchema);
 loginRouter.get("/signin", async (req, res) => {
-  //   console.log(req.path);
   const findUser = await LoginModel.findOne({
     username: req.query.username,
     password: req.query.password
   });
-  // res.setHeader("Access-Control-Allow-Origin", "*");
-  // res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  // res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  // res.setHeader("Access-Control-Allow-Credentials", true);
-  // console.log(posts);
   if (findUser) {
-    res.send({ isSuccess: true });
+    res.send({ isSuccess: true, id: findUser.id });
   } else {
     res.send({
+      isSuccess: false,
       error: "not found",
       message: "نام کاربری یا پسورد اشتباه است."
     });
@@ -33,56 +20,30 @@ loginRouter.get("/signin", async (req, res) => {
 });
 
 loginRouter.post("/signup", async (req, res) => {
-  //   console.log(req.path);
+  const findAllUsers = await LoginModel.find();
+  const findUser = await LoginModel.findOne({
+    username: req.query.username
+  });
   const setUser = new LoginModel({
     username: req.query.username,
-    password: req.query.password
+    password: req.query.password,
+    id: findAllUsers.length
   });
-  await setUser
-    .save()
-    .then(() => {
-      res.send({ isSucces: true, message: "ثبت نام با موفقیت انجام شد." });
-    })
-    .catch(() => {
-      res.send({ isSucces: false, message: "عملیات ثبت نام با خطا مواجه شد." });
-    });
+  if (!findUser) {
+    await setUser
+      .save()
+      .then(() => {
+        res.send({ isSuccess: true, message: "ثبت نام با موفقیت انجام شد." });
+      })
+      .catch(() => {
+        res.send({
+          isSuccess: false,
+          message: "عملیات ثبت نام با خطا مواجه شد."
+        });
+      });
+  } else {
+    res.send({ isSuccess: false, message: "کاربر قبلا ثبت نام کرداست. " });
+  }
 });
 
-// const SignupModel = mongoose.model("signup", signupSchema);
-
-// loginRouter.post("/signup", async (req, res) => {
-//   //   console.log(req.path);
-//   const signup = new SignupModel({
-//     username: req.query.username,
-//     password: req.query.password
-//   });
-//   signup
-//     .save()
-//     .then(() => {
-//       res.setHeader("Access-Control-Allow-Origin", "*");
-//       res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//       res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-//       res.setHeader("Access-Control-Allow-Credentials", true);
-//       res.send({ message: "service added one " });
-//     })
-//     .catch(() => res.send({ message: "operation with error" }));
-//   //   const posts = await SignupModel.save({
-//   //     username: req.query.username,
-//   //     password: req.query.password
-//   //   });
-//   //   res.setHeader("Access-Control-Allow-Origin", "*");
-//   //   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//   //   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-//   //   res.setHeader("Access-Control-Allow-Credentials", true);
-//   //   if (posts) {
-//   //     res.send(posts);
-//   //   } else {
-//   //     res.send({
-//   //       error: "not found",
-//   //       message: "نام کاربری یا پسورد اشتباه است."
-//   //     });
-//   //   }
-// });
-
 module.exports = loginRouter;
-

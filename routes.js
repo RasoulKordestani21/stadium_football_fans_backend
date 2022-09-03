@@ -1,8 +1,10 @@
 const express = require("express");
 // const Post = require("./models/Post"); // new
 const loginRouter = require("./models/login/login");
+const personRouter = require("./models/main/person");
 const router = express.Router();
 
+router.use("/", personRouter);
 router.use("/", loginRouter);
 
 // router.post("/posts", async (req, res) => {
